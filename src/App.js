@@ -55,7 +55,6 @@ const slidesDesktop = {
 
 export default function App() {
   const [isMobile, setIsMobile] = useState(null)
-  // const [slides, setSlides] = useState(() => isMobile ? slidesMobile : slidesDesktop)
   const [currentSlide, setCurrentSlide] = useState(1)
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
 
@@ -128,10 +127,10 @@ export default function App() {
 function ChangingImage({isMobile, currentSlide, onPrevSlide, onNextSlide, changingImage}) {
   return <div className="left__main--side"><img className="main__img" src={isMobile ? slidesMobile[currentSlide].image : slidesDesktop[currentSlide].image} alt="" ref={changingImage} />
   <div className="buttons">
-    <button onClick={onPrevSlide}>
+    <button aria-label="Previous slide" onClick={onPrevSlide}>
       <img src={arrowPrev} alt="" />
     </button>
-    <button onClick={onNextSlide}>
+    <button aria-label="Next slide" onClick={onNextSlide}>
       <img src={arrowNext} alt="" />
     </button>
   </div></div>
