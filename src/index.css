@@ -1,13 +1,392 @@
-body {
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+/*
+  2. Remove default margin
+*/
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+}
+/*
+  Typographic tweaks!
+  3. Add accessible line-height
+  4. Improve text rendering
+*/
+html {
+  font-size: 62.5%;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  font-family: "League Spartan", sans-serif;
+  font-size: 1.4rem;
+  color: var(--Dark-Gray);
+  /* background-color: black; */
 }
+/*
+  5. Improve media defaults
+*/
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+/*
+  6. Remove built-in form typography styles
+*/
+input, button, textarea, select {
+  font: inherit;
+}
+/*
+  7. Avoid text overflows
+*/
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+/*
+  8. Create a root stacking context
+*/
+#root, #__next {
+  isolation: isolate;
+}
+
+:root {
+  --Dark-Gray: hsl(0, 0%, 63%);
+--Black: hsl(0, 0%, 0%);
+--White: hsl(0, 0%, 100%);
+--Very-Dark-Gray: hsl(0, 0%, 27%);
+}
+
+.display.display {
+  display: block;
+}
+
+.display--none.display--none {
+ opacity: 0;
+}
+
+.rotate.rotate {
+  transform: rotate(45deg);
+  top: .8rem;
+}
+
+.rotate--negative.rotate--negative {
+  transform: rotate(-45deg);
+  top: .8rem;
+}
+
+.nav--mobile,.nav--desktop {
+  display: none;
+}
+
+.opacity.opacity {
+  opacity: 1;
+  visibility: visible;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, .7);
+  z-index: 6;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .75s;
+}
+
+.custom__header.custom__header {
+  width: 100%;
+  height: 7rem;
+  z-index: 9;
+  position: relative;
+  background-color: #fff;
+  opacity: 1;
+  transform: translateY(0%);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: all 1s;
+  background-color: #fff;
+}
+
+.burger {
+  position: absolute;
+  top: 2.75rem;
+  left: 5%;
+  z-index: 19;
+  cursor: pointer;
+  background-color: #999;
+}
+
+.custom__burger__line.custom__burger__line {
+  background-color: var(--Dark-Gray);
+}
+
+.burger__line--first {
+  display: block;
+  height: .2rem;
+  background-color: #fff;
+  width: 2rem;
+  transition: all .3s;
+  position: absolute;
+}
+.burger__line--second {
+  display: block;
+  height: .2rem;
+  background-color: #fff;
+  width: 2rem;
+  position: absolute;
+  top: .8rem;
+  transition: all .3s;
+}
+.burger__line--third {
+  display: block;
+  height: .2rem;
+  background-color: #fff;
+  width: 2rem;
+  position: absolute;
+  top: 1.6rem;
+  transition: all .3s;
+}
+
+.nav__ul--desktop {
+  display: flex;
+  list-style: none;
+  gap: 3rem;
+  font-size: 1.6rem;
+
+}
+
+.nav__ul--mobile {
+  display: flex;
+  list-style: none;
+  gap: 2.5rem;
+  z-index: 9;
+  font-size: 1.6rem;
+  position: absolute;
+  top: 2.5rem;
+  left: 10%;
+  background: #fff;
+  width: 100%;
+}
+
+.nav__li--desktop {
+  cursor: pointer;
+  position: relative;
+}
+
+.nav__li--desktop::after {
+  content: '';
+  position: absolute;
+  width: 0rem;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom: 1px solid white;
+  opacity: 0;
+  transition: all .3s;
+}
+
+.nav__li--desktop:hover::after {
+  opacity: 1;
+  width: 2rem;
+}
+
+.nav__li--mobile {
+  text-transform: lowercase;
+  color: var(--Black);
+  font-weight: 700;
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 3rem;
+  z-index: 2;
+}
+
+.left__main--side {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.buttons {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: var(--Black);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  z-index: 5;
+
+}
+
+.buttons button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .3s;
+}
+
+.buttons button:hover {
+  background-color: var(--Very-Dark-Gray);
+
+}
+
+h1 {
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--Black);
+}
+
+h2 {
+  color: var(--Black);
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  letter-spacing: .3rem;
+}
+
+.main__img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.section__change, .main__img {
+  transform: translateX(-100%);
+  opacity: 0;
+  transition: all 1s;
+}
+
+.page__content {
+  padding: 4.75rem;
+  display: grid;
+  gap: 1rem;
+  justify-items: start;
+}
+
+.btn--shop {
+  text-transform: uppercase;
+  letter-spacing: .8rem;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  margin-top: 2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .3s;
+}
+
+.btn--shop:hover {
+  color: var(--Dark-Gray);
+  letter-spacing: 1rem;
+}
+
+.transform {
+  opacity: 1;
+  transform: translateX(0%);
+}
+
+.section__constant img {
+  width: 100%;
+  height: 100%;
+}
+
+
+
+@media (min-width: 75em) {
+  .burger {
+    display: none;
+  }
+  .header {
+  position: absolute;
+  left: 5%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  top: 9%;
+  color: var(--White);
+  opacity: 1;
+  background-color: transparent;
+}
+  .nav--desktop {
+    display: flex;
+    z-index: 10;
+    position: relative;
+  }
+  .main__content {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    justify-items: start;
+    align-items: center;
+  }
+  .section__constant {
+  display: grid;
+  grid-template-columns: 4fr 5fr 4fr;
+    align-items: center;
+}
+
+.page__content {
+  font-size: 1.55rem;
+  padding-inline: 10rem;
+  gap: 2rem;
+}
+
+.section__constant--content {
+  font-size: 1.5rem;
+  padding-inline: 4rem;
+}
+
+.buttons {
+  width: 11vw;
+  z-index: 2;
+}
+
+.buttons button {
+  padding: 3rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+  letter-spacing: .5rem;
+}
+h1 {
+  font-size: 4rem;
+}
+.logo {
+  position: static;
+  transform: translateX(0);
+}
+}
+
+@media (min-width:87.5em ) {
+  .buttons {
+  transform: translateX(100%);
+}
+}
+
+@media (min-width:93.75em ) {
+
+.section__constant--content {
+  font-size: 1.5rem;
+  padding-inline: 10rem;
+}
+}
+
